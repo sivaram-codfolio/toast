@@ -1,11 +1,12 @@
 {
   "name": "toast",
   "private": false,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "A lightweight and customizable toast notification system built with TypeScript, Tailwind CSS, and Vite for seamless user experience.",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "set \"GENERATE_SOURCEMAP=false\" && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -33,5 +34,7 @@
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "4.6.1"
-  }
+  },
+  "author": "Sivaram",
+  "license": "MIT"
 }

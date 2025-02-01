@@ -12,9 +12,9 @@ export const TostElement: FC<props> = ({ state, hideToast }) => {
   return (
     <div
       className={clsx(
-        "transition-transform top-5 left-[40%] font-medium fixed flex justify-between gap-2 items-center shadow-md min-h-[48px] max-w-[50vw] px-4 py-2 rounded-lg min-w-[300px] text-sm truncate whitespace-nowrap z-50",
-        state?.varient === "success" && "bg-white text-primary",
-        state?.varient === "error" && "bg-error text-white",
+        "transition-transform top-5 left-[40%] font-medium fixed flex justify-between gap-3 items-center shadow-md min-h-[48px] max-w-[50vw] px-4 py-2 rounded-lg min-w-[300px] text-sm truncate whitespace-nowrap z-50",
+        state?.variant === "success" && "bg-white text-black",
+        state?.variant === "error" && "bg-red-700 text-white",
         state?.show && "translate-y-0",
         !state?.show && "-translate-y-[200%]"
       )}

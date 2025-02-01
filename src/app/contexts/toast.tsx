@@ -1,15 +1,15 @@
 import { createContext } from "react";
 
-export type ToastVarient = "success" | "error" | "none";
+export type ToastVariant = "success" | "error" | "none";
 
 export interface ToastContextState {
   show: boolean;
   message: string;
-  varient: ToastVarient;
+  variant: ToastVariant;
 }
 
 export interface ToastContextIF {
-  (message: string, varient: ToastVarient): void;
+  (message: string, {variant, duration}: {variant: ToastVariant, duration?: number}): void;
 }
 
 export const ToastContext = createContext<ToastContextIF | undefined>(

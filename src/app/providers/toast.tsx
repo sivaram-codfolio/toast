@@ -2,12 +2,12 @@ import {
   ToastContext,
   ToastContextIF,
   ToastContextState,
-  ToastVarient,
+  ToastVariant,
 } from "@app/contexts";
 import { FC, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import { TostElement } from "@app/components";
 
-const SNACKBAR_TIMER = 5000;
+const TOAST_TIMER = 5000;
 
 interface props {
   children?: ReactNode;
@@ -19,34 +19,43 @@ export const ToastContextProvider: FC<props> = ({ children }) => {
   const [state, setState] = useState<ToastContextState>({
     show: false,
     message: "",
-    varient: "none",
+    variant: "none",
   });
 
   const hideToast = useCallback(() => {
     setState({
       show: false,
       message: "",
-      varient: "none",
+      variant: "none",
     });
   }, []);
 
   const showToast = useCallback<ToastContextIF>(
-    (message: string, varient: ToastVarient) => {
-      // show snackbar
-      setState({ show: true, message, varient });
+   async (message: string, { variant, duration }: { variant: ToastVariant, duration?: number }) => {
+      // check the status of the toast
+      // toast is already active then close
+      if (state.show) {
+        hideToast();
 
-      // clear the snackbar, if it exists
+        // wait for some little to trigger the new toast
+        await new Promise((resolve) => setTimeout(resolve, 500));
+      }
+
+      // show toast
+      setState({ show: true, message, variant });
+
+      // clear the toast, if it exists
       if (timerRef.current != null) {
         clearTimeout(timerRef.current);
       }
 
-      // set new timer to hide the snackbar after defined time
+      // set new timer to hide the toast after defined time
       timerRef.current = setTimeout(() => {
         hideToast();
         timerRef.current = null;
-      }, SNACKBAR_TIMER);
+      }, duration ?? TOAST_TIMER);
     },
-    [hideToast]
+    [state, hideToast]
   );
 
   useEffect(() => {
