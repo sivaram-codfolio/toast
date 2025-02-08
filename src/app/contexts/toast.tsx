@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-export type ToastVariant = "success" | "error" | "none";
+export type ToastVariant = "success" | "error" | "warning" | "none";
 
 export interface ToastContextState {
   show: boolean;
